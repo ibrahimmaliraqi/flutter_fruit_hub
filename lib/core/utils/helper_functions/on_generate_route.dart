@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
 import 'package:fruit_hub/feaatures/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:fruit_hub/feaatures/splash/presentation/views/splash_view.dart';
 
@@ -11,6 +12,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case OnBoardingView.id:
       return MaterialPageRoute(
         builder: (context) => OnBoardingView(),
+      );
+    case LoginView.id:
+      return MaterialPageRoute(
+        builder: (context) => LoginView(),
       );
 
     default:

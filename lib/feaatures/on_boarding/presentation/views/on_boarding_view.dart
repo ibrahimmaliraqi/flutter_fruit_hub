@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_button.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
 import 'package:fruit_hub/feaatures/on_boarding/data/models/on_boarding_model.dart';
 import 'package:gap/gap.dart';
 import 'package:svg_flutter/svg_flutter.dart';
@@ -57,22 +58,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
         return Column(
           children: [
             SizedBox(
-              height: h * 0.55,
+              height: h * 0.5,
               width: w,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Visibility(
-                    visible: currentPage == 0 ? true : false,
-                    child: Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text("تخط"),
-                      ),
-                    ),
-                  ),
                   Positioned.fill(
                     child: SvgPicture.asset(
                       onList[index].backgroundImage,
@@ -87,6 +77,22 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                       fit: BoxFit.contain,
                     ),
                   ),
+                  Visibility(
+                    visible: currentPage == 0 ? true : false,
+                    child: Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(
+                            context,
+                          ).pushReplacementNamed(LoginView.id),
+                          child: Text("تخط"),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -99,7 +105,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               child: Text(
                 onList[index].subTitle,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16, color: Colors.black54),
+                style: const TextStyle(fontSize: 16, color: Color(0xff4E5556)),
               ),
             ),
             Gap(30),
@@ -122,12 +128,12 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: CustomButton(
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(LoginView.id),
                   text: "ابدأ الان",
                 ),
               ),
             ),
-
-            const SizedBox(height: 30),
           ],
         );
       },
