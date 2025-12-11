@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_button.dart';
 import 'package:fruit_hub/feaatures/on_boarding/data/models/on_boarding_model.dart';
+import 'package:gap/gap.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -30,15 +31,16 @@ class OnBoardingViewBody extends StatefulWidget {
 }
 
 class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
-  final PageController _controller = PageController();
+  late PageController _controller;
 
-  double currentPage = 0;
+  int currentPage = 0;
   @override
   void initState() {
+    _controller = PageController();
     super.initState();
     _controller.addListener(() {
       setState(() {
-        currentPage = _controller.page!;
+        currentPage = _controller.page!.round();
       });
     });
   }
@@ -88,11 +90,9 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 ],
               ),
             ),
-
-            const SizedBox(height: 20),
+            Gap(22),
             onList[index].title!,
-
-            const SizedBox(height: 12),
+            Gap(24),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -102,25 +102,28 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 style: const TextStyle(fontSize: 16, color: Colors.black54),
               ),
             ),
+            Gap(30),
 
-            const Spacer(),
             DotsIndicator(
               dotsCount: onList.length,
-              position: currentPage,
+              position: currentPage.toDouble(),
               decorator: DotsDecorator(
                 activeColor: AppColors.primary,
                 color: Color(0xff5DB957).withOpacity(.5),
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
+            Gap(20),
             Visibility(
-              visible: currentPage == 1 ? true : false,
+              maintainAnimation: true,
+              maintainState: true,
+              maintainSize: true,
+              visible: currentPage > 0.8 ? true : false,
 
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CustomButton(),
+                child: CustomButton(
+                  text: "ابدأ الان",
+                ),
               ),
             ),
 
