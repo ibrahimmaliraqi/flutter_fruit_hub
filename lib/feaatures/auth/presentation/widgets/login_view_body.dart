@@ -4,6 +4,7 @@ import 'package:fruit_hub/core/utils/app_styles.dart';
 import 'package:fruit_hub/core/utils/assets.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_button.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/sign_up_view.dart';
 import 'package:fruit_hub/feaatures/auth/presentation/widgets/custom_social_auth_button.dart';
 import 'package:gap/gap.dart';
 
@@ -55,10 +56,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   "لا تمتلك حساب؟ ",
                   style: AppStyles.semiBold16,
                 ),
-                Text(
-                  "قم بإنشاء حساب",
-                  style: AppStyles.semiBold16.copyWith(
-                    color: AppColors.primary,
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pushNamed(SignUpView.id),
+                  child: Text(
+                    "قم بإنشاء حساب",
+                    style: AppStyles.semiBold16.copyWith(
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
               ],
