@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/constants.dart';
+import 'package:fruit_hub/core/services/shared_prefs.dart';
 import 'package:fruit_hub/core/utils/assets.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
 import 'package:fruit_hub/feaatures/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -35,9 +38,14 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   }
 
   void excudeFunction() {
+    bool inOnBording = SharedPrefs.getBool(isOnBoardingSeen);
     Future.delayed(Duration(seconds: 3)).then(
       (value) {
-        Navigator.pushReplacementNamed(context, OnBoardingView.id);
+        if (inOnBording) {
+          Navigator.pushReplacementNamed(context, LoginView.id);
+        } else {
+          Navigator.pushReplacementNamed(context, OnBoardingView.id);
+        }
       },
     );
   }

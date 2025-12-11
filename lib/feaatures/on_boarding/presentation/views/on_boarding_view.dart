@@ -1,5 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/constants.dart';
+import 'package:fruit_hub/core/services/shared_prefs.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_button.dart';
 import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
@@ -85,9 +87,12 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: GestureDetector(
-                          onTap: () => Navigator.of(
-                            context,
-                          ).pushReplacementNamed(LoginView.id),
+                          onTap: () {
+                            SharedPrefs.setBool(isOnBoardingSeen, true);
+                            Navigator.of(
+                              context,
+                            ).pushReplacementNamed(LoginView.id);
+                          },
                           child: Text("تخط"),
                         ),
                       ),
@@ -128,8 +133,12 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: CustomButton(
-                  onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(LoginView.id),
+                  onTap: () {
+                    SharedPrefs.setBool(isOnBoardingSeen, true);
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(LoginView.id);
+                  },
                   text: "ابدأ الان",
                 ),
               ),
