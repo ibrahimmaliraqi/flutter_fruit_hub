@@ -50,7 +50,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     side: BorderSide(color: Color(0xffDDDFDF)),
                     borderRadius: BorderRadiusGeometry.circular(4),
                   ),
-                  checkColor: AppColors.primary,
                   value: check,
                   onChanged: (value) {
                     setState(() {
