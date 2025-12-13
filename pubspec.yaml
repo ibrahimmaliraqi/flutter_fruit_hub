@@ -41,6 +41,8 @@ dependencies:
   gap: ^3.0.1
   dots_indicator: ^4.0.1
   shared_preferences: ^2.5.4
+  flutter_bloc: ^9.1.1
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_launcher_icons: "^0.14.4"
