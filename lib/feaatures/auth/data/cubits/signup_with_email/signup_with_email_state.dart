@@ -7,7 +7,11 @@ final class SignupWithEmailInitial extends SignupWithEmailState {}
 
 final class SignupWithEmailLoading extends SignupWithEmailState {}
 
-final class SignupWithEmailSuccess extends SignupWithEmailState {}
+final class SignupWithEmailSuccess extends SignupWithEmailState {
+  final String sucessMessage;
+
+  SignupWithEmailSuccess(this.sucessMessage);
+}
 
 final class SignupWithEmailFailure extends SignupWithEmailState {
   final String errorMessage;
