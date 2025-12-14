@@ -8,6 +8,7 @@ import 'package:fruit_hub/feaatures/auth/data/cubit/sign_up_with_email/sign_up_w
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repo_impl.dart';
 import 'package:fruit_hub/feaatures/splash/presentation/views/splash_view.dart';
 import 'package:fruit_hub/generated/l10n.dart';
+import 'package:fruit_hub/root_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -44,6 +45,7 @@ class FruitsApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Cairo',
           scaffoldBackgroundColor: Colors.white,
+          splashColor: Colors.transparent,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.white,
           ),
@@ -61,7 +63,7 @@ class FruitsApp extends StatelessWidget {
         ],
         onGenerateRoute: onGenerateRoute,
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashView.id,
+        initialRoute: RootView.id,
       ),
     );
   }
