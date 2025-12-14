@@ -37,8 +37,11 @@ class SupabaseFailure extends Failure {
     if (message.contains('Email not confirmed')) {
       return 'يرجى تأكيد البريد الإلكتروني';
     }
+    if (message.contains('Unable to validate email address: invalid format')) {
+      return 'تنسيق البريد الإلكتروني غير صحيح';
+    }
 
-    return 'خطأ في المصادقة';
+    return message;
   }
 
   static String _mapPostgrestError(String? code) {

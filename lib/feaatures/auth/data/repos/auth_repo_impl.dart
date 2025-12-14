@@ -13,11 +13,11 @@ class AuthRepoImpl extends AuthRepos {
   }) async {
     try {
       final AuthResponse res = await supabase.auth.signUp(
-        email: password,
+        email: email,
         password: password,
         data: {'name': name},
       );
-      return Right(res.user);
+      return Right(res.user!.id);
     } catch (e) {
       return Left(SupabaseFailure.fromException(e).message);
     }
