@@ -98,6 +98,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 listener: (context, state) {
                   if (state is SignUpWithEmailSuccess) {
                     snack(context, text: "تم انشاء الحساب بنجاح");
+                    print(state.data.uId);
+                    print(state.data.email);
+                    print(state.data.name);
+
                     Navigator.of(context).pop();
                   } else if (state is SignUpWithEmailFailure) {
                     snack(context, text: state.failure);

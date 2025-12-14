@@ -8,8 +8,8 @@ final class SignUpWithEmailInitial extends SignUpWithEmailState {}
 final class SignUpWithEmailLoading extends SignUpWithEmailState {}
 
 final class SignUpWithEmailSuccess extends SignUpWithEmailState {
-  final String success;
-  SignUpWithEmailSuccess(this.success);
+  final UserModel data;
+  SignUpWithEmailSuccess(this.data);
 }
 
 final class SignUpWithEmailFailure extends SignUpWithEmailState {

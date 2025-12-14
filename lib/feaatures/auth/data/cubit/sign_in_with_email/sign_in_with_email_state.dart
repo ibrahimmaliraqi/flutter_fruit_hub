@@ -8,8 +8,8 @@ final class SignInWithEmailInitial extends SignInWithEmailState {}
 final class SignInWithEmailLoading extends SignInWithEmailState {}
 
 final class SignInWithEmailSuccess extends SignInWithEmailState {
-  final dynamic sucess;
-  SignInWithEmailSuccess(this.sucess);
+  final UserModel data;
+  SignInWithEmailSuccess(this.data);
 }
 
 final class SignInWithEmailFailure extends SignInWithEmailState {

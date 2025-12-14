@@ -41,7 +41,13 @@ class FruitsApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(fontFamily: 'Cairo'),
+        theme: ThemeData(
+          fontFamily: 'Cairo',
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+          ),
+        ),
         locale: Locale("ar"),
         localizationsDelegates: [
           S.delegate,

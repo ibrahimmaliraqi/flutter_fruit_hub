@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:fruit_hub/feaatures/auth/data/models/user_model.dart';
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repos.dart';
 import 'package:meta/meta.dart';
 
@@ -18,7 +19,7 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
     );
     result.fold(
       (failure) => emit(SignInWithEmailFailure(failure.message)),
-      (success) => emit(SignInWithEmailSuccess(success)),
+      (data) => emit(SignInWithEmailSuccess(data)),
     );
   }
 }
