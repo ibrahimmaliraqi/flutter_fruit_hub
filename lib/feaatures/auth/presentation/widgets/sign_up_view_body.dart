@@ -101,7 +101,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     Navigator.of(context).pop();
                   } else if (state is SignUpWithEmailFailure) {
                     snack(context, text: state.failure);
-                    print(state.failure);
                   }
                 },
                 builder: (context, state) {

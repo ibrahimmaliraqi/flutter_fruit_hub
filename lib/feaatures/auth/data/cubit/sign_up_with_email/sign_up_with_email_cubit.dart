@@ -19,7 +19,7 @@ class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
       name: name,
     );
     result.fold(
-      (failure) => emit(SignUpWithEmailFailure(failure)),
+      (failure) => emit(SignUpWithEmailFailure(failure.message)),
       (success) => emit(SignUpWithEmailSuccess(success)),
     );
   }

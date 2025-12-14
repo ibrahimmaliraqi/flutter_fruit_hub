@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepoImpl extends AuthRepos {
   @override
-  Future<Either<String, dynamic>> signUp({
+  Future<Either<Failure, dynamic>> signUp({
     required String name,
     required String email,
     required String password,
@@ -19,7 +19,23 @@ class AuthRepoImpl extends AuthRepos {
       );
       return Right(res.user!.id);
     } catch (e) {
-      return Left(SupabaseFailure.fromException(e).message);
+      return Left(SupabaseFailure.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final AuthResponse res = await supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      return right(res.user!.id);
+    } catch (e) {
+      return left(SupabaseFailure.fromException(e));
     }
   }
 }
