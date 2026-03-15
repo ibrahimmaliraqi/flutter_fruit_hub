@@ -12,7 +12,10 @@ class FeatureList extends StatelessWidget {
         children: List.generate(
           4,
           (index) {
-            return FeaturedItem();
+            return Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: FeaturedItem(),
+            );
           },
         ),
       ),
