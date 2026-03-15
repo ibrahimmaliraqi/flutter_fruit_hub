@@ -12,6 +12,11 @@ abstract class AppStyles {
     fontSize: 13,
     fontWeight: FontWeight.bold,
   );
+  static TextStyle reqular13 = TextStyle(
+    color: Color(0xff949D9E),
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+  );
   static TextStyle bold16 = TextStyle(
     color: Colors.white,
     fontSize: 16,
