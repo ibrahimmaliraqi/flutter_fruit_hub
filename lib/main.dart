@@ -39,6 +39,9 @@ class FruitsApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.white,
+          ),
           fontFamily: 'Cairo',
           scaffoldBackgroundColor: Colors.white,
           splashColor: Colors.transparent,

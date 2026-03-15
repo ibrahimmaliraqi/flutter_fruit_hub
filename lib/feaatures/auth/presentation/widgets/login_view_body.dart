@@ -10,7 +10,7 @@ import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
 import 'package:fruit_hub/feaatures/auth/data/cubit/sign_in_with_email/sign_in_with_email_cubit.dart';
 import 'package:fruit_hub/feaatures/auth/presentation/views/sign_up_view.dart';
 import 'package:fruit_hub/feaatures/auth/presentation/widgets/custom_social_auth_button.dart';
-import 'package:fruit_hub/feaatures/home/presentation/views/home_view.dart';
+import 'package:fruit_hub/root_view.dart';
 import 'package:gap/gap.dart';
 
 class LoginViewBody extends StatefulWidget {
@@ -67,7 +67,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   if (state is SignInWithEmailFailure) {
                     snack(context, text: state.errMessage);
                   } else if (state is SignInWithEmailSuccess) {
-                    Navigator.of(context).pushReplacementNamed(HomeView.id);
+                    Navigator.of(context).pushReplacementNamed(RootView.id);
                   }
                 },
                 builder: (context, state) {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_styles.dart';
+import 'package:fruit_hub/core/utils/assets.dart';
 import 'package:fruit_hub/feaatures/category/presentation/views/category_view.dart';
 import 'package:fruit_hub/feaatures/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/feaatures/order/presentation/views/order_view.dart';
 import 'package:fruit_hub/feaatures/profile/presentation/views/profile_view.dart';
+import 'package:svg_flutter/svg.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -26,12 +28,14 @@ class _RootViewState extends State<RootView> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
+        height: 70,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 0.4,
-              blurRadius: 4,
+              color: Color(0x19000000),
+              blurRadius: 7,
+              offset: Offset(0, -2),
+              spreadRadius: 2,
             ),
           ],
         ),
@@ -53,20 +57,67 @@ class _RootViewState extends State<RootView> {
             unselectedLabelStyle: AppStyles.bold13,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'الرئيسية',
+                icon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxOutlineHome,
+                  width: 24,
+                  height: 24,
+                  color: const Color(0xff4E5556),
+                ),
+                activeIcon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxBoldHome,
+                  width: 24,
+                  height: 24,
+                  color: AppColors.primary,
+                ),
+                label: "الرئيسية",
               ),
+
               BottomNavigationBarItem(
-                icon: Icon(Icons.category),
-                label: 'الاقسام',
+                icon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxOutlineProducts,
+                  width: 24,
+                  height: 24,
+                  color: const Color(0xff4E5556),
+                ),
+                activeIcon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxBoldProducts,
+                  width: 24,
+                  height: 24,
+                  color: AppColors.primary,
+                ),
+                label: "الاقسام",
               ),
+
               BottomNavigationBarItem(
-                icon: Icon(Icons.online_prediction_rounded),
-                label: 'الطلبات',
+                icon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxOutlineShoppingCart,
+                  width: 24,
+                  height: 24,
+                  color: const Color(0xff4E5556),
+                ),
+                activeIcon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxBoldShoppingCart,
+                  width: 24,
+                  height: 24,
+                  color: AppColors.primary,
+                ),
+                label: "الطلبات",
               ),
+
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'الاعدادات',
+                icon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxOutlineUser,
+                  width: 24,
+                  height: 24,
+                  color: const Color(0xff4E5556),
+                ),
+                activeIcon: SvgPicture.asset(
+                  Assets.assetsImagesVuesaxBoldUser,
+                  width: 24,
+                  height: 24,
+                  color: AppColors.primary,
+                ),
+                label: "الاعدادات",
               ),
             ],
           ),
