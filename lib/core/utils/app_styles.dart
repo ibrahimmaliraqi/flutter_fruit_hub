@@ -27,4 +27,9 @@ abstract class AppStyles {
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
+  static TextStyle regular16 = TextStyle(
+    color: Color(0xff949D9E),
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
 }
