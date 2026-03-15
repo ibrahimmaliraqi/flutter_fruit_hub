@@ -7,8 +7,9 @@ class FeaturedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var itemWidth = MediaQuery.sizeOf(context).width;
     return SizedBox(
-      width: double.infinity,
+      width: itemWidth,
       height: 158,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
@@ -30,7 +31,7 @@ class FeaturedItem extends StatelessWidget {
             Positioned(
               top: -298,
               child: Container(
-                width: MediaQuery.sizeOf(context).width * .5,
+                width: itemWidth * .5,
                 height: 753,
                 decoration: const ShapeDecoration(
                   color: Color(0xFF5DB957),

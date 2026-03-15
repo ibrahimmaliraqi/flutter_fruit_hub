@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruit_hub/feaatures/home/presentation/widgets/featured_item.dart';
+import 'package:fruit_hub/feaatures/home/presentation/widgets/feature_list.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/home_app_bar.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/home_search.dart';
 import 'package:gap/gap.dart';
@@ -20,7 +20,7 @@ class HomeViewBody extends StatelessWidget {
                 Gap(16),
                 HomeSearch(),
                 Gap(12),
-                FeaturedItem(),
+                FeatureList(),
               ],
             ),
           ),
