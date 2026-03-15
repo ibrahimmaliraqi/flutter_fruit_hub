@@ -6,12 +6,17 @@ import 'package:fruit_hub/core/utils/helper_functions/on_generate_route.dart';
 import 'package:fruit_hub/feaatures/auth/data/cubit/sign_in_with_email/sign_in_with_email_cubit.dart';
 import 'package:fruit_hub/feaatures/auth/data/cubit/sign_up_with_email/sign_up_with_email_cubit.dart';
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repo_impl.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
 import 'package:fruit_hub/generated/l10n.dart';
-import 'package:fruit_hub/root_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefs.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const FruitsApp());
 }
@@ -54,7 +59,7 @@ class FruitsApp extends StatelessWidget {
         ],
         onGenerateRoute: onGenerateRoute,
         debugShowCheckedModeBanner: false,
-        initialRoute: RootView.id,
+        initialRoute: LoginView.id,
       ),
     );
   }

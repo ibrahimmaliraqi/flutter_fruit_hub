@@ -12,4 +12,7 @@ abstract class AuthRepos {
     required String email,
     required String password,
   });
+  Future<void> addUser({
+    required UserModel user,
+  });
 }

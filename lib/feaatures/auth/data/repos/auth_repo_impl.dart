@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruit_hub/core/errors/failure.dart';
 import 'package:fruit_hub/feaatures/auth/data/models/user_model.dart';
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repos.dart';
-import 'package:fruit_hub/main.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepoImpl extends AuthRepos {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   @override
   Future<Either<Failure, UserModel>> signUp({
     required String name,
@@ -13,20 +16,26 @@ class AuthRepoImpl extends AuthRepos {
     required String password,
   }) async {
     try {
-      final AuthResponse res = await supabase.auth.signUp(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-        data: {'name': name},
       );
-      return Right(
-        UserModel(
-          name: res.user!.userMetadata!["name"],
-          email: res.user!.email!,
-          uId: res.user!.id,
-        ),
+
+      final user = UserModel(
+        email: email,
+        name: name,
+        uId: credential.user!.uid,
       );
+
+      await addUser(user: user);
+
+      return right(user);
+    } on FirebaseAuthException catch (e) {
+      return left(AuthFailure.fromFirebaseAuthException(e));
+    } on FirebaseException catch (e) {
+      return left(AuthFailure.unknown(e.message ?? e.toString()));
     } catch (e) {
-      return Left(SupabaseFailure.fromException(e));
+      return left(AuthFailure.unknown(e.toString()));
     }
   }
 
@@ -36,19 +45,38 @@ class AuthRepoImpl extends AuthRepos {
     required String password,
   }) async {
     try {
-      final AuthResponse res = await supabase.auth.signInWithPassword(
+      final credential = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(
-        UserModel(
-          name: res.user!.userMetadata!["name"],
-          email: res.user!.email!,
-          uId: res.user!.id,
-        ),
-      );
+
+      final user = await getUser(uId: credential.user!.uid);
+
+      return right(user);
+    } on FirebaseAuthException catch (e) {
+      return left(AuthFailure.fromFirebaseAuthException(e));
+    } on FirebaseException catch (e) {
+      return left(AuthFailure.unknown(e.message ?? e.toString()));
     } catch (e) {
-      return left(SupabaseFailure.fromException(e));
+      return left(AuthFailure.unknown(e.toString()));
     }
+  }
+
+  Future<void> addUser({
+    required UserModel user,
+  }) async {
+    await firestore.collection('users').doc(user.uId).set(user.toJson());
+  }
+
+  Future<UserModel> getUser({
+    required String uId,
+  }) async {
+    final doc = await firestore.collection('users').doc(uId).get();
+
+    if (!doc.exists || doc.data() == null) {
+      throw Exception('User data not found in Firestore');
+    }
+
+    return UserModel.fromJson(doc.data()!);
   }
 }

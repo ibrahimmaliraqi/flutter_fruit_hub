@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDBv9rHAgPchsC7hPWfUJ3JMi9qTCNRuzg',
-    appId: '1:912313250490:web:12c669db5bacaa1d37c883',
-    messagingSenderId: '912313250490',
-    projectId: 'fruit-hub-5a97b',
-    authDomain: 'fruit-hub-5a97b.firebaseapp.com',
-    storageBucket: 'fruit-hub-5a97b.firebasestorage.app',
-    measurementId: 'G-231T781GFD',
+    apiKey: 'AIzaSyCCvrV3BSqcEytsWbnqV4allulFBJnkg-I',
+    appId: '1:1029239756284:web:7f52beb37609e177fbce79',
+    messagingSenderId: '1029239756284',
+    projectId: 'fruit-hub-35380',
+    authDomain: 'fruit-hub-35380.firebaseapp.com',
+    storageBucket: 'fruit-hub-35380.firebasestorage.app',
+    measurementId: 'G-EBFQM6YDCF',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDyJoFCOMOXBvcsJjiOQZju4hMpElueS7c',
-    appId: '1:912313250490:android:21f01e4fcf3c47d137c883',
-    messagingSenderId: '912313250490',
-    projectId: 'fruit-hub-5a97b',
-    storageBucket: 'fruit-hub-5a97b.firebasestorage.app',
+    apiKey: 'AIzaSyAXdIzzMBnX1hWAgoqGsBIjJucJml0kYII',
+    appId: '1:1029239756284:android:7bfaee0de21d3d75fbce79',
+    messagingSenderId: '1029239756284',
+    projectId: 'fruit-hub-35380',
+    storageBucket: 'fruit-hub-35380.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDBv9rHAgPchsC7hPWfUJ3JMi9qTCNRuzg',
-    appId: '1:912313250490:web:cbc2ed5e64bd5bb937c883',
-    messagingSenderId: '912313250490',
-    projectId: 'fruit-hub-5a97b',
-    authDomain: 'fruit-hub-5a97b.firebaseapp.com',
-    storageBucket: 'fruit-hub-5a97b.firebasestorage.app',
-    measurementId: 'G-X1GLRRXFVW',
+    apiKey: 'AIzaSyCCvrV3BSqcEytsWbnqV4allulFBJnkg-I',
+    appId: '1:1029239756284:web:8609bdf4db9fd383fbce79',
+    messagingSenderId: '1029239756284',
+    projectId: 'fruit-hub-35380',
+    authDomain: 'fruit-hub-35380.firebaseapp.com',
+    storageBucket: 'fruit-hub-35380.firebasestorage.app',
+    measurementId: 'G-E26JYBQZ1T',
   );
 }
