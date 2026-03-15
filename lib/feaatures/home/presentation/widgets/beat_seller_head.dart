@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/utils/app_styles.dart';
+import 'package:fruit_hub/feaatures/home/presentation/views/best_selling_view.dart';
 
 class BeatSellerHead extends StatelessWidget {
   const BeatSellerHead({super.key});
@@ -16,11 +17,14 @@ class BeatSellerHead extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Text(
-          'المزيد',
-          textAlign: TextAlign.center,
-          style: AppStyles.reqular13.copyWith(
-            color: const Color(0xFF949D9E),
+        InkWell(
+          onTap: () => Navigator.pushNamed(context, BestSellingView.rootName),
+          child: Text(
+            'المزيد',
+            textAlign: TextAlign.center,
+            style: AppStyles.reqular13.copyWith(
+              color: const Color(0xFF949D9E),
+            ),
           ),
         ),
       ],

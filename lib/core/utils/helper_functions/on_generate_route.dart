@@ -6,6 +6,7 @@ import 'package:fruit_hub/feaatures/splash/presentation/views/splash_view.dart';
 import 'package:fruit_hub/root_view.dart';
 
 import '../../../feaatures/category/presentation/views/category_view.dart';
+import '../../../feaatures/home/presentation/views/best_selling_view.dart';
 import '../../../feaatures/home/presentation/views/home_view.dart';
 import '../../../feaatures/order/presentation/views/order_view.dart';
 import '../../../feaatures/profile/presentation/views/profile_view.dart';
@@ -19,6 +20,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case SignUpView.id:
       return MaterialPageRoute(
         builder: (context) => SignUpView(),
+      );
+    case BestSellingView.rootName:
+      return MaterialPageRoute(
+        builder: (context) => BestSellingView(),
       );
     case RootView.id:
       return MaterialPageRoute(
