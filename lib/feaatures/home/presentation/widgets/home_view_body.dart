@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/feaatures/home/presentation/widgets/beat_seller_head.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/feature_list.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/home_app_bar.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/home_search.dart';
@@ -21,6 +22,9 @@ class HomeViewBody extends StatelessWidget {
                 HomeSearch(),
                 Gap(12),
                 FeatureList(),
+                Gap(12),
+                BeatSellerHead(),
+                Gap(8),
               ],
             ),
           ),
