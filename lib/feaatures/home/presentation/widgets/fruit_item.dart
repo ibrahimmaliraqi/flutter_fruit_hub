@@ -25,7 +25,6 @@ class FruitItem extends StatelessWidget {
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: double.infinity,
@@ -40,12 +39,19 @@ class FruitItem extends StatelessWidget {
               ),
               Gap(20),
               ListTile(
-                title: Text(
-                  'فراولة',
-                  textAlign: TextAlign.right,
-                  style: AppStyles.reqular13.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 5,
+                ),
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Text(
+                    'بطيخ',
+                    textAlign: TextAlign.right,
+                    style: AppStyles.reqular13.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
 
