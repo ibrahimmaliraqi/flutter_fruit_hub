@@ -1,59 +1,93 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
   final String message;
-  const Failure(this.message);
+  final String? code;
+
+  const Failure({
+    required this.message,
+    this.code,
+  });
+
+  @override
+  String toString() => 'AppFailure(message: $message, code: $code)';
 }
 
-class SupabaseFailure extends Failure {
-  const SupabaseFailure(super.message);
+class AuthFailure extends Failure {
+  const AuthFailure({
+    required super.message,
+    super.code,
+  });
 
-  factory SupabaseFailure.fromException(Object error) {
-    if (error is AuthException) {
-      return SupabaseFailure(_mapAuthError(error.message));
-    }
+  factory AuthFailure.fromFirebaseAuthException(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'invalid-email':
+        return const AuthFailure(
+          message: 'The email address is not valid.',
+          code: 'invalid-email',
+        );
 
-    if (error is PostgrestException) {
-      return SupabaseFailure(_mapPostgrestError(error.code));
-    }
+      case 'user-disabled':
+        return const AuthFailure(
+          message: 'This user account has been disabled.',
+          code: 'user-disabled',
+        );
 
-    if (error.toString().contains('SocketException')) {
-      return const SupabaseFailure('لا يوجد اتصال بالإنترنت');
-    }
+      case 'user-not-found':
+        return const AuthFailure(
+          message: 'No user found for this email.',
+          code: 'user-not-found',
+        );
 
-    return const SupabaseFailure('حدث خطأ غير متوقع');
-  }
+      case 'wrong-password':
+      case 'invalid-credential':
+        return const AuthFailure(
+          message: 'Email or password is incorrect.',
+          code: 'invalid-credential',
+        );
 
-  static String _mapAuthError(String message) {
-    if (message.contains('Invalid login credentials')) {
-      return 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
-    }
-    if (message.contains('User already registered')) {
-      return 'هذا البريد مستخدم مسبقًا';
-    }
-    if (message.contains('Password should be at least')) {
-      return 'كلمة المرور ضعيفة';
-    }
-    if (message.contains('Email not confirmed')) {
-      return 'يرجى تأكيد البريد الإلكتروني';
-    }
-    if (message.contains('Unable to validate email address: invalid format')) {
-      return 'تنسيق البريد الإلكتروني غير صحيح';
-    }
+      case 'email-already-in-use':
+        return const AuthFailure(
+          message: 'This email is already in use.',
+          code: 'email-already-in-use',
+        );
 
-    return message;
-  }
+      case 'weak-password':
+        return const AuthFailure(
+          message: 'The password is too weak.',
+          code: 'weak-password',
+        );
 
-  static String _mapPostgrestError(String? code) {
-    switch (code) {
-      case '23505':
-        return 'البيانات موجودة مسبقًا';
-      case '42501':
-        return 'ليس لديك صلاحية';
-      case 'PGRST116':
-        return 'لا توجد بيانات';
+      case 'operation-not-allowed':
+        return const AuthFailure(
+          message: 'This authentication method is not enabled.',
+          code: 'operation-not-allowed',
+        );
+
+      case 'too-many-requests':
+        return const AuthFailure(
+          message: 'Too many requests. Please try again later.',
+          code: 'too-many-requests',
+        );
+
+      case 'network-request-failed':
+        return const AuthFailure(
+          message: 'Please check your internet connection.',
+          code: 'network-request-failed',
+        );
+
       default:
-        return 'خطأ في قاعدة البيانات';
+        return AuthFailure(
+          message: e.message ?? 'Authentication failed. Please try again.',
+          code: e.code,
+        );
     }
+  }
+
+  factory AuthFailure.unknown([String? message]) {
+    return AuthFailure(
+      message: message ?? 'Something went wrong. Please try again.',
+      code: 'unknown',
+    );
   }
 }
