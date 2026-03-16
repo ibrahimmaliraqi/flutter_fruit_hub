@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/constants.dart';
+import 'package:fruit_hub/core/services/shared_prefs.dart';
 import 'package:fruit_hub/core/utils/assets.dart';
 import 'package:fruit_hub/core/utils/helper_functions/is_login.dart';
+import 'package:fruit_hub/feaatures/auth/presentation/views/login_view.dart';
 import 'package:fruit_hub/feaatures/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:fruit_hub/root_view.dart';
 import 'package:svg_flutter/svg.dart';
@@ -15,7 +18,7 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    excudeFunction();
+    excuteNaviagtion();
     super.initState();
   }
 
@@ -36,15 +39,21 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     );
   }
 
-  void excudeFunction() {
-    Future.delayed(Duration(seconds: 3)).then(
-      (value) async {
-        if (await isLogin()) {
+  void excuteNaviagtion() {
+    bool isOnBoardingViewSeen = SharedPrefs.getBool(isOnBoardingSeen) ?? false;
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      if (isOnBoardingViewSeen) {
+        bool isLoggedIn = await isLogin();
+
+        if (isLoggedIn) {
           Navigator.pushReplacementNamed(context, RootView.id);
         } else {
-          Navigator.pushReplacementNamed(context, OnBoardingView.id);
+          Navigator.pushReplacementNamed(context, LoginView.id);
         }
-      },
-    );
+      } else {
+        Navigator.pushReplacementNamed(context, OnBoardingView.id);
+      }
+    });
   }
 }

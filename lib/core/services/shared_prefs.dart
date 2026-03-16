@@ -14,4 +14,12 @@ class SharedPrefs {
   static setBool(String key, bool value) async {
     prefs.setBool(key, value);
   }
+
+  static setString(String key, String value) async {
+    await prefs.setString(key, value);
+  }
+
+  static getString({required String key}) async {
+    return prefs.getString(key) ?? "";
+  }
 }

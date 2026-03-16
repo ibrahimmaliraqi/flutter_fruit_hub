@@ -26,7 +26,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
-    email.text = "ibrahim0780@gmail.com";
+    email.text = "ibrahim@gmail.com";
     password.text = "07700770";
     super.initState();
   }

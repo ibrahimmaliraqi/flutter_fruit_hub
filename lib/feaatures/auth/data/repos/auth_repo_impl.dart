@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fruit_hub/constants.dart';
 import 'package:fruit_hub/core/errors/failure.dart';
+import 'package:fruit_hub/core/services/shared_prefs.dart';
 import 'package:fruit_hub/feaatures/auth/data/models/user_model.dart';
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repos.dart';
 
@@ -20,12 +22,12 @@ class AuthRepoImpl extends AuthRepos {
         email: email,
         password: password,
       );
-
       final user = UserModel(
         email: email,
         name: name,
         uId: credential.user!.uid,
       );
+      await SharedPrefs.setString(kUserName, name);
 
       await addUser(user: user);
 
