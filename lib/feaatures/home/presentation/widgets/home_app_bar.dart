@@ -6,8 +6,9 @@ import 'package:fruit_hub/core/utils/widgets/notification_widget.dart';
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
+    this.onNotiTap,
   });
-
+  final VoidCallback? onNotiTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -30,7 +31,7 @@ class HomeAppBar extends StatelessWidget {
       leading: Image.asset(
         Assets.assetsImagesProfileImage,
       ),
-      trailing: NotificationWidget(),
+      trailing: InkWell(onTap: onNotiTap, child: NotificationWidget()),
     );
   }
 }

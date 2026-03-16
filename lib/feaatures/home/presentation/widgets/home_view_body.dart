@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/beat_seller_head.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/feature_list.dart';
@@ -18,7 +19,11 @@ class HomeViewBody extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                HomeAppBar(),
+                HomeAppBar(
+                  onNotiTap: () async {
+                    FirebaseAuth.instance.signOut();
+                  },
+                ),
                 Gap(16),
                 HomeSearch(),
                 Gap(12),
