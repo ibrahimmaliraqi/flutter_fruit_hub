@@ -7,6 +7,7 @@ import 'package:fruit_hub/feaatures/auth/data/cubit/sign_in_with_email/sign_in_w
 import 'package:fruit_hub/feaatures/auth/data/cubit/sign_up_with_email/sign_up_with_email_cubit.dart';
 import 'package:fruit_hub/feaatures/auth/data/repos/auth_repo_impl.dart';
 import 'package:fruit_hub/feaatures/home/data/manager/get_featured_product/get_featured_product_cubit.dart';
+import 'package:fruit_hub/feaatures/home/data/manager/get_product/get_products_cubit.dart';
 import 'package:fruit_hub/feaatures/home/data/repos/home_repo_impl.dart';
 import 'package:fruit_hub/feaatures/splash/presentation/views/splash_view.dart';
 import 'package:fruit_hub/generated/l10n.dart';
@@ -41,6 +42,10 @@ class FruitsApp extends StatelessWidget {
         BlocProvider(
           create: (BuildContext context) =>
               GetFeaturedProductCubit(HomeRepoImpl())..getFeaturedProduct(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) =>
+              GetProductsCubit(HomeRepoImpl())..getProducts(),
         ),
       ],
       child: MaterialApp(

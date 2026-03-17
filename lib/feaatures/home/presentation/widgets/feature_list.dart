@@ -24,7 +24,7 @@ class FeatureList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
-                4,
+                state.product.length,
                 (index) {
                   final data = state.product[index];
                   return Padding(

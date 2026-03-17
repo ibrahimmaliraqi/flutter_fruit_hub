@@ -22,4 +22,21 @@ class HomeRepoImpl extends HomeRepo {
       return left(AuthFailure.unknown(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> getProduct() async {
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection('products')
+          .get();
+
+      final products = result.docs
+          .map((doc) => ProductModel.fromJson(doc.data()))
+          .toList();
+
+      return right(products);
+    } catch (e) {
+      return left(AuthFailure.unknown(e.toString()));
+    }
+  }
 }
