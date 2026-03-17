@@ -10,7 +10,7 @@ class GetProductsCubit extends Cubit<GetProductsState> {
   HomeRepo homeRepo;
   Future getProducts() async {
     emit(GetProductsLoading());
-    final result = await homeRepo.getFeaturedProduct();
+    final result = await homeRepo.getProduct();
     result.fold(
       (fail) {
         emit(GetProductsFailure(fail.message));
