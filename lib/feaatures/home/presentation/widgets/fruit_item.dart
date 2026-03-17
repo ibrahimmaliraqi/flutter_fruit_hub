@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_styles.dart';
-import 'package:fruit_hub/core/utils/assets.dart';
+import 'package:fruit_hub/feaatures/home/data/model/product_model.dart';
+import 'package:fruit_hub/feaatures/home/presentation/widgets/network_image.dart';
 import 'package:gap/gap.dart';
 
 class FruitItem extends StatelessWidget {
-  const FruitItem({super.key});
+  final ProductModel productModel;
+  const FruitItem({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 163,
-      height: 230,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: const Color(0xFFF3F5F7),
@@ -33,9 +33,7 @@ class FruitItem extends StatelessWidget {
               SizedBox(
                 width: 114,
                 height: 105,
-                child: Image.asset(
-                  Assets.assetsImagesWatermelonTest,
-                ),
+                child: NetWorkImage(imageUrl: productModel.imageUrl),
               ),
               Gap(20),
               ListTile(
@@ -46,7 +44,7 @@ class FruitItem extends StatelessWidget {
                 title: Padding(
                   padding: const EdgeInsets.only(bottom: 4),
                   child: Text(
-                    'بطيخ',
+                    productModel.name,
                     textAlign: TextAlign.right,
                     style: AppStyles.reqular13.copyWith(
                       fontWeight: FontWeight.w700,
@@ -59,7 +57,7 @@ class FruitItem extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '20جنية ',
+                        text: '${productModel.price} ألف',
                         style: TextStyle(
                           color: const Color(0xFFF4A91F) /* Orange-500 */,
                           fontSize: 13,
