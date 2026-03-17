@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/feaatures/home/data/manager/get_product/get_products_cubit.dart';
 import 'package:fruit_hub/feaatures/home/data/model/product_model.dart';
+import 'package:fruit_hub/feaatures/home/presentation/views/product_detil_view.dart';
 import 'package:fruit_hub/feaatures/home/presentation/widgets/fruit_item.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -72,6 +73,12 @@ class FruitItemGridView extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return FruitItem(
+                onFruitClick: () {
+                  Navigator.of(context).pushNamed(
+                    ProductDetailsView.id,
+                  );
+                },
+
                 productModel: state.product[index],
               );
             },
