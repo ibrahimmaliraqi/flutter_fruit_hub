@@ -19,8 +19,6 @@ class BestSellingGridView extends StatelessWidget {
       builder: (context, state) {
         if (state is GetProductsLoading) {
           return GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: 4,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
@@ -39,7 +37,7 @@ class BestSellingGridView extends StatelessWidget {
                     imageUrl: "imageUrl",
                     isFeatured: true,
                     isOrganic: true,
-                    name: "اسم منتج طويل لتجربة السكيليتون",
+                    name: "منتج",
                     numberOfCalories: 44,
                     price: 43,
                     reviews: [],
@@ -63,8 +61,6 @@ class BestSellingGridView extends StatelessWidget {
           }
 
           return GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: state.product.length,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,

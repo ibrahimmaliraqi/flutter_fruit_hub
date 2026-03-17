@@ -37,7 +37,7 @@ class FruitItemGridView extends StatelessWidget {
                     imageUrl: "imageUrl",
                     isFeatured: true,
                     isOrganic: true,
-                    name: "اسم منتج طويل لتجربة السكيليتون",
+                    name: "منتج",
                     numberOfCalories: 44,
                     price: 43,
                     reviews: [],
@@ -63,7 +63,7 @@ class FruitItemGridView extends StatelessWidget {
           }
 
           return SliverGrid.builder(
-            itemCount: state.product.length,
+            itemCount: 4,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
               mainAxisSpacing: 8,
