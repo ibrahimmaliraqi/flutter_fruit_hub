@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fruit_hub/core/utils/assets.dart';
 
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({super.key, this.onTap});
+  const FeaturedItem({super.key, this.onTap, required this.imageUrl});
   final VoidCallback? onTap;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,16 @@ class FeaturedItem extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: Image.asset(
-                Assets.assetsImagesWatermelonTest,
-                fit: BoxFit.cover,
+              child: CachedNetworkImage(
+                imageUrl:
+                    "https://hchbtxlqvtmswhthhsev.supabase.co/storage/v1/object/public/$imageUrl",
+                fit: BoxFit.contain,
+                errorWidget: (context, url, error) {
+                  return Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Icon(Icons.broken_image, size: 40),
+                  );
+                },
               ),
             ),
 

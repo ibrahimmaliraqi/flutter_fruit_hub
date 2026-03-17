@@ -40,7 +40,7 @@ class FruitsApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (BuildContext context) =>
-              GetFeaturedProductCubit(HomeRepoImpl()),
+              GetFeaturedProductCubit(HomeRepoImpl())..getFeaturedProduct(),
         ),
       ],
       child: MaterialApp(
