@@ -49,7 +49,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     ),
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildTitleAndPrice(
                         price: data.price,
