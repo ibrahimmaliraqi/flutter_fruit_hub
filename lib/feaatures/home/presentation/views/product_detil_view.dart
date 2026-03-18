@@ -15,58 +15,64 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments as ProductModel;
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args == null || args is! ProductModel) {
+      return const Scaffold(
+        body: Center(
+          child: Text("لم يتم استلام بيانات المنتج"),
+        ),
+      );
+    }
+
+    final ProductModel data = args;
+
     return Scaffold(
       backgroundColor: const Color(0xffF8F8F8),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    _buildTopSection(imageUrl: data.imageUrl),
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 14,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(28),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildTitleAndPrice(
-                              price: data.price,
-                              productName: data.name,
-                            ),
-                            const SizedBox(height: 14),
-                            _buildRatingRow(),
-                            const SizedBox(height: 14),
-                            _buildDescription(desc: data.description),
-                            const SizedBox(height: 18),
-                            _buildInfoGrid(
-                              isOrganic: data.isOrganic,
-                              cal: data.numberOfCalories,
-                            ),
-                            const Spacer(),
-                            _buildAddToCartButton(),
-                          ],
-                        ),
-                      ),
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                _buildTopSection(imageUrl: data.imageUrl),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(28),
                     ),
-                  ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      _buildTitleAndPrice(
+                        price: data.price,
+                        productName: data.name,
+                      ),
+                      const SizedBox(height: 14),
+                      _buildRatingRow(),
+                      const SizedBox(height: 14),
+                      _buildDescription(desc: data.description),
+                      const SizedBox(height: 18),
+                      _buildInfoGrid(
+                        isOrganic: data.isOrganic,
+                        cal: data.numberOfCalories,
+                      ),
+                      const SizedBox(height: 24),
+                      _buildAddToCartButton(),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -95,14 +101,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 padding: EdgeInsets.zero,
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(
-                  Icons.arrow_back_ios_rounded,
+                  Icons.arrow_forward_ios_rounded,
                   size: 18,
                   color: Colors.black54,
                 ),
               ),
             ),
           ),
-
           Positioned(
             bottom: -1,
             left: 0,
@@ -117,7 +122,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               ),
             ),
           ),
-
           Positioned(
             bottom: 8,
             left: 16,
@@ -169,6 +173,19 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     "https://hchbtxlqvtmswhthhsev.supabase.co/storage/v1/object/public/$imageUrl",
                 width: 200,
                 height: 200,
+                fit: BoxFit.contain,
+                placeholder: (context, url) => const SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                errorWidget: (context, url, error) => const SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: Icon(Icons.image_not_supported_outlined),
+                ),
               ),
             ),
           ),
@@ -184,22 +201,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          children: [
-            Text(
-              productName,
-              textAlign: TextAlign.right,
-
-              style: TextStyle(
-                fontSize: 22,
-                fontFamily: 'Cairo',
-                fontWeight: FontWeight.w800,
-                color: Colors.black,
-              ),
+        Expanded(
+          child: Text(
+            productName,
+            textAlign: TextAlign.right,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 22,
+              fontFamily: 'Cairo',
+              fontWeight: FontWeight.w800,
+              color: Colors.black,
             ),
-          ],
+          ),
         ),
-        Spacer(),
+        const SizedBox(width: 12),
         Text(
           'دينار $price / الكيلو',
           textAlign: TextAlign.right,
@@ -210,21 +226,20 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             fontWeight: FontWeight.w700,
           ),
         ),
-        const SizedBox(width: 12),
       ],
     );
   }
 
   Widget _buildRatingRow() {
     return Row(
-      children: [
-        const Icon(
+      children: const [
+        Icon(
           Icons.star_rounded,
           color: Color(0xffF4C542),
           size: 20,
         ),
-        const SizedBox(width: 4),
-        const Text(
+        SizedBox(width: 4),
+        Text(
           '4.5',
           style: TextStyle(
             color: Color(0xff4E5556),
@@ -233,8 +248,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(width: 6),
-        const Text(
+        SizedBox(width: 6),
+        Text(
           '(30+)',
           style: TextStyle(
             color: Color(0xffA0A0A0),
@@ -243,8 +258,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        const Spacer(),
-        const Text(
+        Spacer(),
+        Text(
           'المراجعات',
           textDirection: TextDirection.rtl,
           style: TextStyle(
@@ -265,7 +280,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       desc,
       textDirection: TextDirection.rtl,
       textAlign: TextAlign.right,
-      style: TextStyle(
+      style: const TextStyle(
         color: Color(0xff8B8B8B),
         fontSize: 13,
         fontFamily: 'Cairo',
@@ -283,13 +298,13 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             Expanded(
               child: InfoCard(
                 icon: Icons.eco_rounded,
-                iconColor: Color(0xff0B7A3E),
-                title: isOrganic == true ? "نعم" : "لا",
+                iconColor: const Color(0xff0B7A3E),
+                title: isOrganic ? "نعم" : "لا",
                 subtitle: 'أورجانيك',
               ),
             ),
-            SizedBox(width: 10),
-            Expanded(
+            const SizedBox(width: 10),
+            const Expanded(
               child: InfoCard(
                 icon: Icons.scale_rounded,
                 iconColor: Color(0xff0B7A3E),
@@ -427,10 +442,8 @@ class InfoCard extends StatelessWidget {
           Text(
             title,
             textDirection: TextDirection.rtl,
-            style: TextStyle(
-              color: iconColor == const Color(0xffFF7A00)
-                  ? const Color(0xff0B7A3E)
-                  : const Color(0xff0B7A3E),
+            style: const TextStyle(
+              color: Color(0xff0B7A3E),
               fontSize: 15,
               fontFamily: 'Cairo',
               fontWeight: FontWeight.w800,
