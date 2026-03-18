@@ -12,56 +12,18 @@ import '../../../feaatures/home/presentation/views/home_view.dart';
 import '../../../feaatures/order/presentation/views/order_view.dart';
 import '../../../feaatures/profile/presentation/views/profile_view.dart';
 
-Route<dynamic> onGenerateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case SplashView.id:
-      return MaterialPageRoute(
-        builder: (context) => SplashView(),
-      );
-    case ProductDetailsView.id:
-      return MaterialPageRoute(
-        builder: (context) => ProductDetailsView(),
-      );
-    case SignUpView.id:
-      return MaterialPageRoute(
-        builder: (context) => SignUpView(),
-      );
-    case BestSellingView.rootName:
-      return MaterialPageRoute(
-        builder: (context) => BestSellingView(),
-      );
-    case RootView.id:
-      return MaterialPageRoute(
-        builder: (context) => RootView(),
-      );
-    case OnBoardingView.id:
-      return MaterialPageRoute(
-        builder: (context) => OnBoardingView(),
-      );
-    case LoginView.id:
-      return MaterialPageRoute(
-        builder: (context) => LoginView(),
-      );
-    case HomeView.id:
-      return MaterialPageRoute(
-        builder: (context) => HomeView(),
-      );
-    case CategoryView.id:
-      return MaterialPageRoute(
-        builder: (context) => CategoryView(),
-      );
-    case OrderView.id:
-      return MaterialPageRoute(
-        builder: (context) => OrderView(),
-      );
-    case ProfileView.id:
-      return MaterialPageRoute(
-        builder: (context) => ProfileView(),
-      );
-
-    default:
-      return MaterialPageRoute(
-        builder: (context) => Scaffold(),
-      );
-  }
+class AppRoutes {
+  static Map<String, WidgetBuilder> routes = {
+    SplashView.id: (context) => const SplashView(),
+    ProductDetailsView.id: (context) => const ProductDetailsView(),
+    SignUpView.id: (context) => const SignUpView(),
+    BestSellingView.rootName: (context) => const BestSellingView(),
+    RootView.id: (context) => const RootView(),
+    OnBoardingView.id: (context) => const OnBoardingView(),
+    LoginView.id: (context) => const LoginView(),
+    HomeView.id: (context) => const HomeView(),
+    CategoryView.id: (context) => const CategoryView(),
+    OrderView.id: (context) => const OrderView(),
+    ProfileView.id: (context) => const ProfileView(),
+  };
 }

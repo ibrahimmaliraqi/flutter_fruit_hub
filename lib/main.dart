@@ -71,7 +71,7 @@ class FruitsApp extends StatelessWidget {
           Locale("ar"),
           Locale("en"),
         ],
-        onGenerateRoute: onGenerateRoute,
+        routes: AppRoutes.routes,
         debugShowCheckedModeBanner: false,
         initialRoute: SplashView.id,
       ),
