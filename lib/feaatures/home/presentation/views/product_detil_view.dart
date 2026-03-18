@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/feaatures/home/data/model/product_model.dart';
 
 class ProductDetailsView extends StatefulWidget {
   static const id = "ProductDetailsView";
@@ -13,6 +15,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as ProductModel;
     return Scaffold(
       backgroundColor: const Color(0xffF8F8F8),
       body: SafeArea(
@@ -23,7 +26,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 color: Colors.white,
                 child: Column(
                   children: [
-                    _buildTopSection(),
+                    _buildTopSection(imageUrl: data.imageUrl),
                     Expanded(
                       child: Container(
                         width: double.infinity,
@@ -38,15 +41,21 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           ),
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildTitleAndPrice(),
+                            _buildTitleAndPrice(
+                              price: data.price,
+                              productName: data.name,
+                            ),
                             const SizedBox(height: 14),
                             _buildRatingRow(),
                             const SizedBox(height: 14),
-                            _buildDescription(),
+                            _buildDescription(desc: data.description),
                             const SizedBox(height: 18),
-                            _buildInfoGrid(),
+                            _buildInfoGrid(
+                              isOrganic: data.isOrganic,
+                              cal: data.numberOfCalories,
+                            ),
                             const Spacer(),
                             _buildAddToCartButton(),
                           ],
@@ -63,7 +72,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     );
   }
 
-  Widget _buildTopSection() {
+  Widget _buildTopSection({required String imageUrl}) {
     return Container(
       height: 300,
       width: double.infinity,
@@ -86,23 +95,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 padding: EdgeInsets.zero,
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(
-                  Icons.arrow_forward_ios_rounded,
+                  Icons.arrow_back_ios_rounded,
                   size: 18,
                   color: Colors.black54,
                 ),
-              ),
-            ),
-          ),
-
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 55,
-            child: Center(
-              child: Image.network(
-                'https://pngimg.com/d/watermelon_PNG235.png',
-                height: 150,
-                fit: BoxFit.contain,
               ),
             ),
           ),
@@ -163,34 +159,37 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               ],
             ),
           ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 55,
+            child: Center(
+              child: CachedNetworkImage(
+                imageUrl:
+                    "https://hchbtxlqvtmswhthhsev.supabase.co/storage/v1/object/public/$imageUrl",
+                width: 200,
+                height: 200,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildTitleAndPrice() {
+  Widget _buildTitleAndPrice({
+    required num price,
+    required String productName,
+  }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Text(
-            'دينار 2000 / الكيلو',
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              color: Color(0xffF4A91F),
-              fontSize: 15,
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        Column(
           children: [
             Text(
-              'بطيخ',
-              textDirection: TextDirection.rtl,
+              productName,
+              textAlign: TextAlign.right,
+
               style: TextStyle(
                 fontSize: 22,
                 fontFamily: 'Cairo',
@@ -200,6 +199,18 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             ),
           ],
         ),
+        Spacer(),
+        Text(
+          'دينار $price / الكيلو',
+          textAlign: TextAlign.right,
+          style: const TextStyle(
+            color: Color(0xffF4A91F),
+            fontSize: 15,
+            fontFamily: 'Cairo',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(width: 12),
       ],
     );
   }
@@ -249,9 +260,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     );
   }
 
-  Widget _buildDescription() {
-    return const Text(
-      'البطيخ من الفواكه الصيفية اللذيذة الغنية بالماء، ويتميز بطعمه الحلو المنعش. يحتوي على نسبة عالية من السوائل مما يجعله مناسباً للترطيب في أيام الصيف، كما أنه خيار مناسب للتقديم الطازج والعصائر.',
+  Widget _buildDescription({required String desc}) {
+    return Text(
+      desc,
       textDirection: TextDirection.rtl,
       textAlign: TextAlign.right,
       style: TextStyle(
@@ -264,16 +275,16 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     );
   }
 
-  Widget _buildInfoGrid() {
+  Widget _buildInfoGrid({required bool isOrganic, required num cal}) {
     return Column(
       children: [
         Row(
-          children: const [
+          children: [
             Expanded(
               child: InfoCard(
                 icon: Icons.eco_rounded,
                 iconColor: Color(0xff0B7A3E),
-                title: '100%',
+                title: isOrganic == true ? "نعم" : "لا",
                 subtitle: 'أورجانيك',
               ),
             ),
@@ -290,7 +301,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         ),
         const SizedBox(height: 10),
         Row(
-          children: const [
+          children: [
             Expanded(
               child: InfoCard(
                 icon: Icons.star_rounded,
@@ -305,7 +316,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               child: InfoCard(
                 icon: Icons.local_fire_department_rounded,
                 iconColor: Color(0xffFF7A00),
-                title: '80 كالوري',
+                title: '$cal كالوري',
                 subtitle: '100 جرام',
               ),
             ),

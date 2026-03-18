@@ -74,6 +74,7 @@ class BestSellingGridView extends StatelessWidget {
                 onFruitClick: () {
                   Navigator.of(context).pushNamed(
                     ProductDetailsView.id,
+                    arguments: state.product[index],
                   );
                 },
                 productModel: state.product[index],
